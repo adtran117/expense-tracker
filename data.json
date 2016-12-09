@@ -1,0 +1,22 @@
+[
+  {
+    "username":"Bowser",
+    "admin":"true",
+    "firstname":"Andy",
+    "lastname":"Tomo",
+    "expenses":{
+      "amount": "100.00",
+      "description": "this is the first description"
+    }
+  },
+  {
+    "username":"Bowser",
+    "admin":"false",
+    "firstname":"Vicky",
+    "lastname":"Tomos",
+    "expenses":{
+      "amount": "200.00",
+      "description": "this is the second description"
+    }
+  }
+]
