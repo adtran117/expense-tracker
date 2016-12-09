@@ -15,9 +15,6 @@ var userSchema = new Schema({
   expenses: [expenseSchema],
 });
 
-
-
-
 var User = mongoose.model('User', userSchema);
 
 module.exports = User;
