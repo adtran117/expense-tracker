@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/expense-tracker');
+mongoose.connect('mongodb://localhost/expense-tracker1');
 
 var db = mongoose.connection;
 

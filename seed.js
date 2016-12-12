@@ -28,7 +28,7 @@ User.collection.insertMany(data, function(err, users){
   if(err){
     return console.err(err);
   }
-
+  console.dir('inserted')
   console.dir('Imported json data!');
 });
 

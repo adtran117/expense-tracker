@@ -4,6 +4,9 @@ import { Navbar, NavItem, NavDropdown, MenuItem, Nav} from 'react-bootstrap';
 
 
 class Navigator extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render () {
     return (
       <Navbar>
@@ -12,6 +15,13 @@ class Navigator extends React.Component {
               <a href="#">Expense Tracker</a>
             </Navbar.Brand>
           </Navbar.Header>
+          <Nav>
+            {
+              this.props.path.props.route.path === '/' ? 
+              <NavItem></NavItem> :
+              <NavItem eventKey={1} href="/api/logout">Logout</NavItem> 
+            }
+          </Nav>
       </Navbar>
 
     );

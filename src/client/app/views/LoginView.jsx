@@ -1,9 +1,34 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { render, findDOMNode } from 'react-dom';
+import $ from 'jquery';
 import { Form, FormGroup, Col, ControlLabel, FormControl, Button} from 'react-bootstrap';
+import { browserHistory, hashHistory } from 'react-router';
 
 
 class LoginView extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleLogin(event) {
+    event.preventDefault();
+    $.ajax({
+      method: 'POST',
+      url: '/api/login',
+      dataType: "json",
+      data: JSON.stringify({
+        username: findDOMNode(this.refs.username).value,
+        password: findDOMNode(this.refs.password).value
+      }),
+      contentType: "Application/json"
+    }).done( (data) => {
+      // Redirect to expenses view after successful authentication
+      browserHistory.push('/expenses');
+    }).fail( (err) => {
+      console.log(err)
+    });
+  }
+
   render () {
     return (
       <Form horizontal>
@@ -12,7 +37,7 @@ class LoginView extends React.Component {
             Username
           </Col>
           <Col sm={8}>
-            <FormControl type="email" placeholder="Email" />
+            <FormControl ref="username" type="text" placeholder="Username" />
           </Col>
         </FormGroup>
 
@@ -21,13 +46,13 @@ class LoginView extends React.Component {
             Password
           </Col>
           <Col sm={8}>
-            <FormControl type="password" placeholder="Password" />
+            <FormControl ref="password" type="password" placeholder="Password" />
           </Col>
         </FormGroup>
 
         <FormGroup>
           <Col smOffset={2} sm={10}>
-            <Button type="submit">
+            <Button onClick={this.handleLogin.bind(this)} type="submit">
               Sign in
             </Button>
           </Col>
