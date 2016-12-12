@@ -9,7 +9,6 @@ class Main extends React.Component {
   }
 
   render() {
-    // console.log(this.props.children)
     return(
       <div>
         <Navbar path={this.props.children}/>

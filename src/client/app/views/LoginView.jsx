@@ -14,7 +14,7 @@ class LoginView extends React.Component {
     event.preventDefault();
     $.ajax({
       method: 'POST',
-      url: '/api/login',
+      url: '/login',
       dataType: "json",
       data: JSON.stringify({
         username: findDOMNode(this.refs.username).value,

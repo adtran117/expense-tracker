@@ -7,6 +7,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import Main from './views/main.jsx'
 import LoginView from './views/LoginView'
 import ExpensesView from './views/ExpensesView'
+import LogoutView from './views/LogoutView'
 
 
 render((

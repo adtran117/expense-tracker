@@ -19,7 +19,7 @@ class Navigator extends React.Component {
             {
               this.props.path.props.route.path === '/' ? 
               <NavItem></NavItem> :
-              <NavItem eventKey={1} href="/api/logout">Logout</NavItem> 
+              <NavItem eventKey={1} href="/logout">Logout</NavItem> 
             }
           </Nav>
       </Navbar>

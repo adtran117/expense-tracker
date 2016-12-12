@@ -35,13 +35,17 @@ app.use(function (req, res, next) {
 
 // All routes go here
 app.get('/', function(req, res) {
-  if(req.session.userCookie) {
-    res.redirect('/expenses');
+  res.sendFile(path.resolve(__dirname, './../client', 'index.html'));
+});
+
+app.get('/expenses', function(req, res) {
+  if(!req.session.userCookie) {
+    res.redirect('/')
   }
   res.sendFile(path.resolve(__dirname, './../client', 'index.html'));
 });
 
-app.post('/api/login', function(req, res) {
+app.post('/login', function(req, res) {
   // Check if user exits in DB
   if (req.body.username === '' || req.body.password === '') {
     res.sendStatus(404);
@@ -56,8 +60,9 @@ app.post('/api/login', function(req, res) {
   });
 });
 
-app.get('/api/logout', function(req, res) {
+app.get('/logout', function(req, res) {
   req.session.destroy();
+  console.log('destroyed!')
   res.redirect('/');
 });
 

@@ -69,8 +69,13 @@
 	
 	var _ExpensesView2 = _interopRequireDefault(_ExpensesView);
 	
+	var _LogoutView = __webpack_require__(/*! ./views/LogoutView */ 488);
+	
+	var _LogoutView2 = _interopRequireDefault(_LogoutView);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// import views
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
@@ -81,8 +86,6 @@
 	    _react2.default.createElement(_reactRouter.Router, { path: '/expenses', component: _ExpensesView2.default })
 	  )
 	), document.getElementById('app'));
-	
-	// import views
 
 /***/ },
 /* 1 */
@@ -27137,7 +27140,6 @@
 	  _createClass(Main, [{
 	    key: 'render',
 	    value: function render() {
-	      // console.log(this.props.children)
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -27220,7 +27222,7 @@
 	          null,
 	          this.props.path.props.route.path === '/' ? _react2.default.createElement(_reactBootstrap.NavItem, null) : _react2.default.createElement(
 	            _reactBootstrap.NavItem,
-	            { eventKey: 1, href: '/api/logout' },
+	            { eventKey: 1, href: '/logout' },
 	            'Logout'
 	          )
 	        )
@@ -46735,7 +46737,7 @@
 	      event.preventDefault();
 	      _jquery2.default.ajax({
 	        method: 'POST',
-	        url: '/api/login',
+	        url: '/login',
 	        dataType: "json",
 	        data: JSON.stringify({
 	          username: (0, _reactDom.findDOMNode)(this.refs.username).value,
@@ -57191,6 +57193,67 @@
 	}(_react2.default.Component);
 	
 	exports.default = ExpensesView;
+
+/***/ },
+/* 488 */
+/*!*********************************************!*\
+  !*** ./src/client/app/views/LogoutView.jsx ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(/*! jquery */ 486);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 235);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 178);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var LogoutView = function (_React$Component) {
+	  _inherits(LogoutView, _React$Component);
+	
+	  function LogoutView(props) {
+	    _classCallCheck(this, LogoutView);
+	
+	    return _possibleConstructorReturn(this, (LogoutView.__proto__ || Object.getPrototypeOf(LogoutView)).call(this, props));
+	  }
+	
+	  _createClass(LogoutView, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      _reactRouter.browserHistory.push('/expenses');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', null);
+	    }
+	  }]);
+	
+	  return LogoutView;
+	}(_react2.default.Component);
+	
+	exports.default = LogoutView;
 
 /***/ }
 /******/ ]);
