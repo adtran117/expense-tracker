@@ -4,21 +4,13 @@
     "admin":"true",
     "firstname":"Andy",
     "lastname":"Tomo",
-    "password": "password",
-    "expenses":{
-      "amount": "100.00",
-      "description": "this is the first description"
-    }
+    "password": "password"
   },
   {
     "username":"bowser",
     "admin":"false",
     "firstname":"Vicky",
     "lastname":"Tomos",
-    "password": "password1",
-    "expenses":{
-      "amount": "200.00",
-      "description": "this is the second description"
-    }
+    "password": "password1"
   }
 ]

@@ -57074,114 +57074,181 @@
 	var ExpensesView = function (_React$Component) {
 	  _inherits(ExpensesView, _React$Component);
 	
-	  function ExpensesView() {
+	  function ExpensesView(props) {
 	    _classCallCheck(this, ExpensesView);
 	
-	    return _possibleConstructorReturn(this, (ExpensesView.__proto__ || Object.getPrototypeOf(ExpensesView)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (ExpensesView.__proto__ || Object.getPrototypeOf(ExpensesView)).call(this, props));
+	
+	    _this.state = {
+	      expenseInfo: []
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(ExpensesView, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.refreshExpenses();
+	    }
+	  }, {
+	    key: 'refreshExpenses',
+	    value: function refreshExpenses() {
+	      var _this2 = this;
+	
+	      _jquery2.default.ajax({
+	        method: 'GET',
+	        url: '/api/userExpenses',
+	        dataType: "json",
+	        contentType: "Application/json"
+	      }).done(function (data) {
+	        _this2.setState({ expenseInfo: data });
+	      }).fail(function (err) {
+	        console.log(err);
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(event) {
+	      var _this3 = this;
+	
+	      event.preventDefault();
+	      // Post to database
+	      _jquery2.default.ajax({
+	        method: 'POST',
+	        url: '/api/userExpenses',
+	        dataType: "json",
+	        data: JSON.stringify({
+	          amount: (0, _reactDom.findDOMNode)(this.refs.amount).value,
+	          description: (0, _reactDom.findDOMNode)(this.refs.description).value
+	        }),
+	        contentType: "Application/json"
+	      }).done(function (data) {
+	        _this3.refreshExpenses();
+	      });
+	    }
+	  }, {
+	    key: 'handleDelete',
+	    value: function handleDelete(index) {
+	      var _this4 = this;
+	
+	      console.log(this.state.expenseInfo[index]._id);
+	      _jquery2.default.ajax({
+	        method: 'DELETE',
+	        url: '/api/userExpenses',
+	        dataType: "json",
+	        data: JSON.stringify({
+	          _id: this.state.expenseInfo[index]._id
+	        }),
+	        contentType: "Application/json"
+	      }).done(function (data) {
+	        _this4.refreshExpenses();
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _reactBootstrap.Table,
-	        { striped: true, bordered: true, condensed: true, hover: true },
+	        'div',
+	        null,
 	        _react2.default.createElement(
-	          'thead',
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'tr',
-	            null,
+	            _reactBootstrap.Form,
+	            { inline: true },
 	            _react2.default.createElement(
-	              'th',
-	              null,
-	              '#'
+	              _reactBootstrap.FormGroup,
+	              { controlId: 'formInlineAmount' },
+	              _react2.default.createElement(
+	                _reactBootstrap.ControlLabel,
+	                null,
+	                'Amount'
+	              ),
+	              ' ',
+	              _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'amount', type: 'text', placeholder: 'Amount' })
 	            ),
+	            ' ',
 	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'First Name'
+	              _reactBootstrap.FormGroup,
+	              { controlId: 'formControlsDescription' },
+	              _react2.default.createElement(
+	                _reactBootstrap.ControlLabel,
+	                null,
+	                'Description'
+	              ),
+	              _react2.default.createElement(_reactBootstrap.FormControl, { ref: 'description', componentClass: 'textarea', placeholder: '' })
 	            ),
+	            ' ',
 	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Last Name'
-	            ),
-	            _react2.default.createElement(
-	              'th',
-	              null,
-	              'Username'
+	              _reactBootstrap.Button,
+	              { type: 'submit', onClick: this.handleSubmit.bind(this) },
+	              'Create New Expense'
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'tbody',
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            'tr',
-	            null,
+	            _reactBootstrap.Table,
+	            { striped: true, bordered: true, condensed: true, hover: true },
 	            _react2.default.createElement(
-	              'td',
+	              'thead',
 	              null,
-	              '1'
+	              _react2.default.createElement(
+	                'tr',
+	                null,
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  'Date Created'
+	                ),
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  'Amount'
+	                ),
+	                _react2.default.createElement(
+	                  'th',
+	                  null,
+	                  'Description'
+	                ),
+	                _react2.default.createElement('th', null)
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'td',
+	              'tbody',
 	              null,
-	              'Mark'
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              'Otto'
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              '@mdo'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'tr',
-	            null,
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              '2'
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              'Jacob'
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              'Thornton'
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              '@fat'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'tr',
-	            null,
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              '3'
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              { colSpan: '2' },
-	              'Larry the Bird'
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              '@twitter'
+	              this.state.expenseInfo.map(function (value, index) {
+	                return _react2.default.createElement(
+	                  'tr',
+	                  null,
+	                  _react2.default.createElement(
+	                    'td',
+	                    { key: index + .1 },
+	                    value.date_created
+	                  ),
+	                  _react2.default.createElement(
+	                    'td',
+	                    { key: index + .2 },
+	                    value.amount
+	                  ),
+	                  _react2.default.createElement(
+	                    'td',
+	                    { key: index + .3 },
+	                    value.description
+	                  ),
+	                  _react2.default.createElement(
+	                    'td',
+	                    { key: index + .4 },
+	                    _react2.default.createElement(
+	                      _reactBootstrap.Button,
+	                      { bsStyle: 'danger', onClick: this.handleDelete.bind(this, index) },
+	                      'Delete'
+	                    )
+	                  )
+	                );
+	              }.bind(this))
 	            )
 	          )
 	        )

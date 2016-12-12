@@ -60,9 +60,46 @@ app.post('/login', function(req, res) {
   });
 });
 
+app.get('/api/userExpenses', function(req, res) {
+  if(!req.session.userCookie) {
+    res.redirect('/');
+  }
+  let cookie = req.session.userCookie;
+
+  handleAuth(cookie.username, cookie.password, function(userInfo) {
+    if (userInfo === false) {
+     res.sendStatus(404);
+    } else {
+      res.send(userInfo.expenses);
+    }
+  })
+});
+
+app.post('/api/userExpenses', function(req, res) {
+  // Post to database
+  User.findOne({username: req.session.userCookie.username}, function(err, user) {
+    user.expenses.push({amount: req.body.amount, description: req.body.description});
+    user.save(function(err) {
+      if(err) console.log(err)
+      console.log('inserted');
+      res.send(true);
+    });
+  });
+})
+
+app.delete('/api/userExpenses', function(req, res) {
+  User.findOne({username: req.session.userCookie.username}, function(err, user) {
+    var doc = user.expenses.id(req.body._id).remove();
+    user.save(function(err) {
+      if(err) console.log(err)
+        console.log('deleted');
+      res.send(true)
+    })
+  })
+})
+
 app.get('/logout', function(req, res) {
   req.session.destroy();
-  console.log('destroyed!')
   res.redirect('/');
 });
 

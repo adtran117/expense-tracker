@@ -9,7 +9,7 @@ var expenseSchema = new Schema({
 });
 
 var userSchema = new Schema({
-  username: { type: String, required: true, index: true, unique: true},
+  username: { type: String, required: true, index: true, unique: true },
   admin: Boolean,
   firstname: String,
   lastname: String,
