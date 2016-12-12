@@ -19,6 +19,12 @@
 * Login with the username `mario`
 * Password is `password`
 
+#### Tech Stack
+* React
+* Node
+* Express
+* MongoDB
+
 ## To Do's
 * Implement admin view
 * Implement account creation
